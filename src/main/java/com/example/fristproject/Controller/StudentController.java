@@ -26,9 +26,16 @@ public class StudentController {
     public List<Student> getStudentList(){
         return studentrepository.findAll();
     }
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public String deleteStudent(@RequestParam long id){
         studentrepository.deleteById(id);
         return "删除成功，请去PostgreSQL查看表";
     }
+
+    @GetMapping("/ageGreater")
+    public List<Student> getStudentsOlderThan(@RequestParam(defaultValue = "18") Integer age){
+        return studentrepository.findByAgeGreaterThan(age);
+    }
+
+
 }
